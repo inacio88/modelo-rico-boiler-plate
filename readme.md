@@ -1,0 +1,3 @@
+- Linguagem obíquoa
+- Domínios ricos vs Domínios anêmicos
+- anêmico não tem expressividade, reflexão básica do que tem no banco
