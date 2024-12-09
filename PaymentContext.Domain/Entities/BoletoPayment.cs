@@ -1,3 +1,5 @@
+using PaymentContext.Domain.ValueObjects;
+
 namespace PaymentContext.Domain.Entities
 {
     public class BoletoPayment : Payment
@@ -8,10 +10,10 @@ namespace PaymentContext.Domain.Entities
         DateTime expireDate,
         decimal total,
         decimal totalPaid,
-        string adress,
+        Address address,
         string owner,
-        string document,
-        string email): base(paidDate, expireDate, total, totalPaid, adress, owner, document, email)
+        Document document,
+        Email email): base(paidDate, expireDate, total, totalPaid, address, owner, document, email)
         {
             BoletoNumber = boletoNumber;
             BarCode = barCode;
