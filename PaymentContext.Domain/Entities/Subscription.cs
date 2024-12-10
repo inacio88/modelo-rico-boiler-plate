@@ -1,6 +1,9 @@
+using PaymentContext.Domain.Contracts;
+using PaymentContext.Shared.Entities;
+
 namespace PaymentContext.Domain.Entities
 {
-    public class Subscription
+    public class Subscription : Entity
     {
         private IList<Payment> _payments;
         public Subscription(DateTime? expireDate)
@@ -20,7 +23,11 @@ namespace PaymentContext.Domain.Entities
 
         public void AddPayment(Payment payment)
         {
-            _payments.Add(payment);
+            AddNotifications(new CreatePaymentContract(payment));
+            if (payment.IsValid)
+            {
+                _payments.Add(payment);
+            }
         }
 
         public void Activate()
