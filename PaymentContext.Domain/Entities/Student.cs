@@ -1,3 +1,4 @@
+using PaymentContext.Domain.Contracts;
 using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Shared.Entities;
 
@@ -34,13 +35,15 @@ namespace PaymentContext.Domain.Entities
                 }
             }
 
-            if (hasSubscriptionActive)
-            {
-                AddNotification("Student.Subscriptions", "você já tem uma assinatura ativa");
-            }
+            var contrato = new CreateStudentContract();
+            contrato
+            .IsFalse(hasSubscriptionActive, "student.Subscriptions", "Você já tem uma assinatura ativa")
+            .AreNotEquals(0, subscription.Payments.Count, "student.subscription.Payments", "Esta assinatura não possui pagamentos")
+            ;
+            AddNotifications(contrato);
 
-            _subscritipns.Add(subscription);
-
+            if(IsValid)
+                _subscritipns.Add(subscription);
         }
     }
 } 
